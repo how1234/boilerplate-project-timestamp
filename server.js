@@ -25,11 +25,11 @@ app.get("/api/hello", function (req, res) {
 });
 
 //First User story
-app.get("/api/timestamp/:date_string", (req,res)=>{
-  const dateString = req.params.date_string;
-  const reg = new RegExp(/[^0-9]/)
+app.get("/api/timestamp/:date_string?", (req,res)=>{
   
-
+  const dateString = req.params.date_string;
+  const reg = new RegExp(/[^0-9\-]/)
+ 
   if(dateString){
     
   
