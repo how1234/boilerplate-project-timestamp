@@ -36,11 +36,21 @@ app.get("/api/timestamp/:date_string?", (req,res)=>{
     if(reg.test(dateString)){
       res.json({"error":"Invalid Date"})
     }else{
-      var date = new Date(dateString)
+
+      if(!new RegExp(/[^0-9]/).test(dateString) && dateString.length===13){
+        var date = new Date(Number(dateString)*1000)
+
+        var jsonObject = {"unix":date.getTime(),"utc":date.toUTCString()}
+        console.log(jsonObject)
+        res.json(jsonObject)
+      }else{
+        var date = new Date(dateString)
       
-      var jsonObject = {"unix":date.getTime(),"utc":date.toUTCString()}
-      console.log(jsonObject)
-      res.json(jsonObject)
+        var jsonObject = {"unix":date.getTime(),"utc":date.toUTCString()}
+        console.log(jsonObject)
+        res.json(jsonObject)
+      }
+      
     }
     
     
